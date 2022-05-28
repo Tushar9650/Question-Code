@@ -1,0 +1,54 @@
+
+bool issafe(int row ,int col,vector<string> border,int n){
+        int temp_row=row;
+        int temp_col=col;
+        
+        while(temp_row>=0 && temp_col>=0)
+            if(border[temp_row--][temp_col--]=='Q')
+                return false;
+        temp_row=row;
+        temp_col=col;
+        while(temp_col>=0)
+           if(border[temp_row][temp_col--]=='Q') return false;
+        temp_row=row;
+        temp_col=col;
+        while(temp_row<n && temp_col>=0)
+            if(border[temp_row++][temp_col--]=='Q')return false;
+        
+        
+        return true;
+  
+    }
+    
+    
+    void solve(int col, vector<vector<string>>& result , vector<string>& border,int n){
+        
+        if(col==n){
+            result.push_back(border);
+            return;
+        }
+            
+            for(int row=0;row<n;row++){
+
+                if(issafe(row,col,border,n)){
+                    border[row][col]='Q';
+                    solve(col+1,result,border,n);
+                    border[row][col]='.';
+                }
+
+            }
+    }
+    
+    
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> result;
+        vector<string> border(n);
+        string s(n,'.');
+        for(int i=0;i<n;i++)
+            border[i]=s;
+        
+        solve(0,result,border,n);
+        
+        return result;
+        
+    }
