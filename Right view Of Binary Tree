@@ -1,0 +1,19 @@
+void view(TreeNode* root,int currlevel,vector<int> &result)
+{
+    if(root==NULL)
+    return;
+    if(currlevel==result.size()){
+        result.push_back(root->val);
+    }
+    view(root->right,currlevel+1,result);
+    view(root->left,currlevel+1,result);
+    
+}
+    
+    vector<int> rightSideView(TreeNode* root) {
+    
+     vector<int> arr;
+     view(root,0,arr);
+     return arr;
+        
+    }
