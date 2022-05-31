@@ -1,31 +1,29 @@
-method 1
+Normal level order traversal---
 
-vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> result;
-        if(root==NULL)
+
+vector<int> levelOrder(Node* root)
+    {
+        vector<int> result;
+      if(root==NULL)
             return result;
-        queue<TreeNode*> q;
+        queue<Node*> q;
         
         q.push(root);
         while(!q.empty()){  
-            int size=q.size();
-            vector<int> leveldata;
-            for(int i=0;i<size;i++){     
-                 TreeNode* temp=q.front();
-                 q.pop();
+              Node* temp=q.front();
+                 
                  if(temp->left!=NULL)
                     q.push(temp->left);
                  if(temp->right!=NULL)
                     q.push(temp->right);
-                 leveldata.push_back(temp->val);
-            }
-            result.push_back(leveldata);
+                    q.pop();
+                 result.push_back(temp->data);
         }
          return result;
-        
     }
     TC - N
     SC - N
     
-    Method 2
-     functions sey
+    Reverse Level Order Traversal-----
+    
+
