@@ -1,0 +1,53 @@
+inorder isley dala kyoki hmey left side dekhney k baad sari leaf node dekhni
+void inorder(Node* root, vector<int>& result){
+    if(root==NULL){
+        return;
+    }
+    if(root->left==NULL && root->right==NULL){
+      result.push_back(root->data);
+    }
+    inorder(root->left,result);
+    inorder(root->right,result);
+}
+
+void solver(Node* root, vector<int>& result){
+    if(root==NULL)
+       return;
+    if(root->right!=NULL)
+     solver(root->right,result);
+    else 
+     solver(root->left,result);
+    if(root->left!=NULL || root->right!=NULL){
+      result.push_back(root->data);
+    }
+    
+}
+
+vector <int> boundary(Node *root)
+    {
+        vector<int> result;
+        if(root==NULL) 
+        return result;
+        
+        result.push_back(root->data);
+        if((root->left==NULL && root->right==NULL))
+        return result;
+        Node* temp=root->left;
+        while(temp!=NULL){ // tree k left side valii nodes visit krne k lia
+            if(temp->left!=NULL || temp->right!=NULL){
+                result.push_back(temp->data);
+            }
+            if(temp->left!=NULL)
+            temp=temp->left;
+            else
+            temp=temp->right;
+        }
+        
+        // leaf node k lia
+        inorder(root,result);
+
+        // tree ki right side k nodes dekhna k lia
+        solver(root->right,result);
+        
+        return result;
+    }
