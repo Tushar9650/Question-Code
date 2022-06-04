@@ -1,0 +1,39 @@
+
+int indx=0;
+
+    int  position(int inorder[],int curr,int start,int end ){ // iski jagah map bhi use krr sktey (value and indx )
+        
+        for(int i=start;i<=end;i++){
+             if(inorder[i]==curr)
+              return i;
+         
+        }
+        
+         return -1;
+    }
+    
+    Node* construct(int inorder[],int preorder[],int start,int end){
+
+        if(start>end)
+        return NULL;
+        int curr=preorder[indx++];
+        Node* root=new Node(curr);
+        if(start==end)
+        return root;
+        int pos=position(inorder,curr,start,end);
+        root->left=construct(inorder,preorder,start,pos-1);
+        root->right=construct(inorder,preorder,pos+1,end);
+        
+        return root;
+        
+    }
+    
+    
+    
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        indx=0;
+        
+        Node* head=construct(in,pre,0,n-1);
+        return head;
+    }
