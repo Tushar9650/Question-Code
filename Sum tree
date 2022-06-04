@@ -1,0 +1,30 @@
+
+int sum(Node* root){
+        
+        if(root==NULL)
+        return 0;
+        
+        return sum(root->left)+sum(root->right)+root->data;
+    }
+    
+bool sum_field(Node* root){
+        
+        if(root==NULL)
+        return true;
+        
+        if(root->left==NULL && root->right==NULL)
+        return true;
+        
+        int ls=sum(root->left);
+        int rs=sum(root->right);
+        
+        if((ls+rs)==root->data)
+        return sum_field(root->left) && sum_field(root->right);
+
+        return false;
+    }
+    
+    bool isSumTree(Node* root)
+    {
+        return sum_field(root);
+    }
