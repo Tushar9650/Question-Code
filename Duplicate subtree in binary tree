@@ -1,0 +1,26 @@
+
+unordered_map<string,int> m;
+    string solver(Node* root){
+        if(root==NULL)
+        return "$";
+        string s="";
+        if(root->left==NULL && root->right==NULL){
+            s+=to_string(root->data);
+            return s;
+        }
+        s+=to_string(root->data);
+        s+=solver(root->left);
+        s+=solver(root->right);
+        m[s]++;
+        return s;
+        
+    }
+    int dupSub(Node *root) {
+        m.clear();
+        string s=solver(root);
+        for(auto it:m){
+            if(it.second>=2)
+            return true;
+        }
+        return !true;
+    }
