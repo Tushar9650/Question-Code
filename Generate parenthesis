@@ -1,0 +1,25 @@
+vector<string> result;
+    
+    void solver(string curr,int l,int r,int n){
+        if(curr.length()==n*2){
+            result.push_back(curr);
+            return;
+        }
+        if(l<n){
+            curr.append("(");
+            solver(curr,l+1,r,n);
+            curr.erase(curr.size()-1);
+        }
+        if(r<l){
+            curr.append(")");
+            solver(curr,l,r+1,n);
+            curr.erase(curr.size()-1);
+        }
+    } 
+    
+    vector<string> generateParenthesis(int n) {
+        string s="";
+        solver(s,0,0,n);
+        return result;
+        
+    }
