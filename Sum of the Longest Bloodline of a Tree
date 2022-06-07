@@ -1,0 +1,23 @@
+vector<int> solver(Node* root){  // vector bus 2 values ko store kraney k lia lay lia vrna pair vgera bhi lay sktey or spce comp. O(1) hai or time n hai
+        if(root==NULL)
+        return {0,0};
+        
+        vector<int> l=solver(root->left);
+        vector<int> r=solver(root->right);
+        if(l[0]>r[0])
+        return {l[0]+1,root->data+l[1]};
+         
+         
+        if(l[0]<r[0])
+        return {r[0]+1,root->data+r[1]};
+        
+        
+        else
+        return {l[0]+1,max(l[1],r[1])+root->data};
+    }
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+       vector<int> result=solver(root);
+        return result[1];
+    }
