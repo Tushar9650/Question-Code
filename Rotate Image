@@ -1,0 +1,18 @@
+void rotate(vector<vector<int>>& matrix) {
+        int indx1=0;
+        int indx2=matrix.size()-1;
+        
+        while(indx1<indx2)
+        swap(matrix[indx1++],matrix[indx2--]);
+        
+        for(int i=0;i<matrix.size();i++){
+            for(int j=i;j<matrix.size();j++){ // j ko i sey he start kia hai kyoki abb sirf transpose krna toh jis value sey start krr rahe usi ke transpose sey swap krna
+                if(i!=j){    
+                int temp=matrix[i][j];  
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
+            }
+                
+        }
+        }
+    }
