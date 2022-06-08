@@ -1,0 +1,31 @@
+
+unordered_map<int,int> m;  // most frequent btana hai toh sbka sum nikla k map may dal do or second valey ko increase krety raho by 1,
+                           // or last may check krlo jiska second jyada hai vo answer agr sbb same hai toh sbko array may dalkey bhejdo
+    int time=INT_MIN;
+    int solver(TreeNode* root){
+        if(root==NULL)
+            return 0;
+        int curr=root->val + solver(root->left) + solver(root->right);
+        m[curr]++;
+        time=max(time,m[curr]);
+        return curr;
+    }
+    
+    vector<int> findFrequentTreeSum(TreeNode* root) {
+        vector<int> result;
+        solver(root);
+        bool tie=true;
+        int maxword=INT_MIN;
+        int maxtime=INT_MIN;
+        if(time<1){
+            for(auto it:m){
+                result.push_back(it.first);
+            }
+            return result;
+        }
+         for(auto it:m) 
+             if(it.second==time)
+                 result.push_back(it.first);
+
+        return result; 
+    }
