@@ -1,0 +1,66 @@
+int live(int row,int col,vector<vector<int>>& board){// yeh sala function uskey 8 neighbours jo zinday hai unkey barey may btaye gaa
+        int zinda=0;
+        int maxrow=board.size();
+        int maxcol=board[0].size();
+        
+        if(row-1>=0)
+            if(abs(board[row-1][col])==1)
+                zinda++;
+        
+        if(row-1>=0 && col-1>=0)
+            if(abs(board[row-1][col-1])==1)
+                zinda++;
+        
+        if(row-1>=0 && col+1<maxcol)
+            if(abs(board[row-1][col+1])==1)
+                zinda++;
+        
+        if(col-1>=0)
+            if(abs(board[row][col-1])==1)
+                zinda++;
+        
+        if(col+1<maxcol)
+            if(abs(board[row][col+1])==1)
+                zinda++;
+        
+        if(row+1<maxrow && col-1>=0)
+            if(abs(board[row+1][col-1])==1)
+                zinda++;
+        
+        if(row+1<maxrow)
+            if(abs(board[row+1][col])==1)
+                zinda++;
+        
+        if(row+1<maxrow && col+1<maxcol)
+            if(abs(board[row+1][col+1])==1)
+                zinda++;
+
+           return zinda;
+    }
+    
+    void gameOfLife(vector<vector<int>>& board) {
+        
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[0].size();j++){
+                int zinda=live(i,j,board);
+                if(abs(board[i][j])==1 && (zinda<2 || zinda>3))
+                    board[i][j]=-1;//ish index k neighbour ko mrna padey gaa kyoki yeh under population may hai but agr isko abbhi  direct zero krr degay toh baki jo iskey
+                                    // according check krey gay vo gadbad hoo jayega isley -1 one lay lia or abs sey hmm check krtey rahey gay
+                                    
+                    
+                if(board[i][j]==0 && zinda==3)
+                    board[i][j]=2; // inko zinda krna hai isley koi bhi except 1 sey initilize kra doo
+            }
+        }
+        
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[0].size();j++){
+                if(board[i][j]==-1)//  ismey jo hmney -1 lgai thay mtlb vo marey gay isley abb unko zero krr degay
+                    board[i][j]=0;
+                else if(board[i][j]==2)// abb jo zinda hai usko 1 sey replace krr.
+                    board[i][j]=1;
+                    
+            }
+        }
+        
+    }
