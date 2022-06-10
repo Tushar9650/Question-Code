@@ -1,0 +1,39 @@
+Node* solver(Node* root,int node,int& k){
+    
+    if(root==NULL)
+    return NULL;
+    
+    if(root->data==node){
+        return root;
+    }
+    
+    Node* l=solver(root->left,node,k);
+    Node* r=solver(root->right,node,k);
+    if(l==NULL && r!=NULL){
+        k--;
+        if(k<=0){
+            k=INT_MAX;
+            return root;
+        }
+        return r;
+    }
+    if(l!=NULL && r==NULL){
+        k--;
+        if(k<=0){
+            k=INT_MAX;
+            return root;
+        }
+        return l;
+    }
+    return NULL;
+}
+
+
+int kthAncestor(Node *root, int k, int node)
+{
+   Node* result=solver(root,node,k);
+   if(result==NULL || result->data==node)
+   return -1;
+   else
+   return result->data;
+}
