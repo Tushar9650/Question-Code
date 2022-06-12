@@ -1,0 +1,25 @@
+bool check(Node* root){
+        
+        if(root==NULL)
+        return true;
+        
+        if(root->left==NULL && root->right==NULL)// leaf node k lia toh true he ho
+        return true;
+       
+        
+        int child=0; 
+        if(root->left)// left child kii value add krey gay
+        child+=root->left->data;
+        
+        if(root->right)// right child kii value add krey gay
+        child+=root->right->data;
+        
+        // agr root ki value left + right value ki euqal hai and uskey  left and right child bhi yeh property follow krr rahe toh true yeh tree child sum parent property ko follow krta hai
+        return root->data==child && check(root->left) && check(root->right);
+        
+    }
+    
+    int isSumProperty(Node *root)
+    {
+     return check(root);
+    }
